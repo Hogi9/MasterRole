@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 	<div class="app-brand demo">
-		<a href="{{ url('/') }}" class="app-brand-link">
+		<a href="{{ url('/dashboard') }}" class="app-brand-link">
 			<span class="app-brand-text demo menu-text text-capitalize fw-bolder ms-2">Master Login</span>
 		</a>
 
@@ -20,25 +20,27 @@
 			</a>
 		</li>
 
-		<li class="menu-item {{ request()->is('hak-akses*') ? 'active open' : '' }}">
-			<a href="javascript:void(0);" class="menu-link menu-toggle">
-				<i class="menu-icon tf-icons bx bx-layout"></i>
-				<div data-i18n="Hak Akses">Hak Akses</div>
-			</a>
+		@if (Auth::user()->hasRole('superadmin'))
+			<li class="menu-item {{ request()->is('hak-akses*') ? 'active open' : '' }}">
+				<a href="javascript:void(0);" class="menu-link menu-toggle">
+					<i class="menu-icon tf-icons bx bx-layout"></i>
+					<div data-i18n="Hak Akses">Hak Akses</div>
+				</a>
 
-			<ul class="menu-sub">
-				<li class="menu-item {{ request()->is('hak-akses/role*') ? 'active' : '' }}">
-					<a href="{{ url('/hak-akses/role') }}" class="menu-link">
-						<div data-i18n="Role">Role</div>
-					</a>
-				</li>
-				<li class="menu-item {{ request()->is('hak-akses/permission*') ? 'active' : '' }}">
-					<a href="{{ url('/hak-akses/permission') }}" class="menu-link">
-						<div data-i18n="Permission">Permission</div>
-					</a>
-				</li>
-			</ul>
-		</li>
+				<ul class="menu-sub">
+					<li class="menu-item {{ request()->is('hak-akses/role*') ? 'active' : '' }}">
+						<a href="{{ url('/hak-akses/role') }}" class="menu-link">
+							<div data-i18n="Role">Role</div>
+						</a>
+					</li>
+					<li class="menu-item {{ request()->is('hak-akses/permission*') ? 'active' : '' }}">
+						<a href="{{ url('/hak-akses/permission') }}" class="menu-link">
+							<div data-i18n="Permission">Permission</div>
+						</a>
+					</li>
+				</ul>
+			</li>
+		@endif
 
 		<li class="menu-header small text-uppercase">
 			<span class="menu-header-text">Authentication</span>
