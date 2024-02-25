@@ -19,3 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/login',[AuthController::class,'index'])->name('login');
+Route::get('/register',[AuthController::class,'register'])->name('register');
+Route::post('/login',[AuthController::class,'loginLogic']);
+Route::post('/register',[AuthController::class,'registerLogic']);

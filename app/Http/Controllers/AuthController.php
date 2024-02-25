@@ -24,8 +24,8 @@ class AuthController extends Controller
         $credentials = $request->only('email-username','password');
 
         $validator = Validator::make($credentials,[
-            'email-username'=> 'required','max:100',
-            'password' => 'required','min:8',
+            'email-username'=> 'required|max:100',
+            'password' => 'required|min:8',
         ]);
 
         if($validator->fails()){
@@ -33,9 +33,9 @@ class AuthController extends Controller
         }
 
         $validator = Validator::make(['email-username' => $credentials['email-username']],[
-            'email-username' => 'required,email',
+            'email-username' => 'required|email',
         ]);
-
+        
         if($validator->fails()){
             if(Auth::attempt(['username' => $credentials['email-username'],'password' => $credentials['password']],$request->filled('remember'))){
                 return redirect('/dashboard')->with('success',"Login Berhasil !");
@@ -45,6 +45,8 @@ class AuthController extends Controller
                 return redirect('/dashboard')->with('success',"Login Berhasil !");
             }
         }
+
+        return back()->with('login-failed','Username Atau Password Salah !')->withInput();
     }
 
     public function registerLogic(Request $request)
