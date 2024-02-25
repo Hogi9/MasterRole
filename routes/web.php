@@ -28,7 +28,7 @@ Route::post('/register',[AuthController::class,'registerLogic']);
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard')->middleware(['role_or_permission:view-dashboard|superadmin']);
 
     Route::get('/hak-akses/role', [RoleController::class,'index'])->name('hak-akses.role');
     Route::get('/hak-akses/permission', [PermissionController::class,'index'])->name('hak-akses.permission');

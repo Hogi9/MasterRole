@@ -66,7 +66,8 @@ class AuthController extends Controller
         $input['password'] = bcrypt($input['password']);
         unset($input['confirm_password']);
         
-        User::create($input);
+        $user = User::create($input);
+        $user->givePermissionTo('view-dashboard');
 
         return redirect('/login')->with('success','Registrasi Berhasil !');
     }
