@@ -28,10 +28,18 @@ Route::post('/register',[AuthController::class,'registerLogic']);
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard')->middleware(['role_or_permission:view-dashboard|superadmin']);
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 
-    Route::get('/hak-akses/role', [RoleController::class,'index'])->name('hak-akses.role');
-    Route::get('/hak-akses/permission', [PermissionController::class,'index'])->name('hak-akses.permission');
+    Route::get('/hak-akses/role', [RoleController::class,'index'])->middleware(['role_or_permission:role-view']);
+    Route::get('/hak-akses/role/create', [RoleController::class,'create'])->middleware(['role_or_permission:role-create']);
+    Route::post('/hak-akses/role/store', [RoleController::class,'store'])->middleware(['role_or_permission:role-create']);
+    Route::get('/hak-akses/role/edit/{roleName}', [RoleController::class,'edit'])->middleware(['role_or_permission:role-update']);
+    Route::post('/hak-akses/role/update', [RoleController::class,'update'])->middleware(['role_or_permission:role-update']);
+    Route::get('/hak-akses/role/delete/{roleName}', [RoleController::class,'delete'])->middleware(['role_or_permission:role-delete']);
+    
+    Route::get('/hak-akses/permission', [PermissionController::class,'index'])->middleware(['role_or_permission:permission-view']);
 });
 
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

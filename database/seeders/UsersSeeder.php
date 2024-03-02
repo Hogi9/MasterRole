@@ -18,7 +18,6 @@ class UsersSeeder extends Seeder
             'email' => "admin@gmail.com",
             'password' => bcrypt('admin123'),
         ]);
-
         $superadmin->assignRole('superadmin');
 
         $testingUser = User::create([
@@ -26,5 +25,6 @@ class UsersSeeder extends Seeder
             'email' => 'testing@gmail.com',
             'password' => bcrypt('admin123'),
         ]);
+        $testingUser->assignRole('guest');
     }
 }

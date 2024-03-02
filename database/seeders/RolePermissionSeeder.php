@@ -15,19 +15,43 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         // Create Master
-        Permission::create(['name'=>'create-user']);
-        Permission::create(['name'=>'update-user']);
-        Permission::create(['name'=>'delete-user']);
-        Permission::create(['name'=>'view-user']);
-        Permission::create(['name'=>'view-dashboard']);
+        Permission::create(['name'=>'user-create']);
+        Permission::create(['name'=>'user-update']);
+        Permission::create(['name'=>'user-delete']);
+        Permission::create(['name'=>'user-view']);
+
+        Permission::create(['name'=>'role-create']);
+        Permission::create(['name'=>'role-update']);
+        Permission::create(['name'=>'role-delete']);
+        Permission::create(['name'=>'role-view']);
+
+        Permission::create(['name'=>'permission-create']);
+        Permission::create(['name'=>'permission-update']);
+        Permission::create(['name'=>'permission-delete']);
+        Permission::create(['name'=>'permission-view']);
+
         Role::create(['name'=>'superadmin']);
+        Role::create(['name'=>'guest']);
 
         // Give Role a Permission
         $roleSuperadmin = Role::findByName('superadmin');
-        $roleSuperadmin->givePermissionTo('view-dashboard');
-        $roleSuperadmin->givePermissionTo('create-user');
-        $roleSuperadmin->givePermissionTo('update-user');
-        $roleSuperadmin->givePermissionTo('delete-user');
-        $roleSuperadmin->givePermissionTo('view-user');
+        // user
+        $roleSuperadmin->givePermissionTo('user-create');
+        $roleSuperadmin->givePermissionTo('user-update');
+        $roleSuperadmin->givePermissionTo('user-delete');
+        $roleSuperadmin->givePermissionTo('user-view');
+        // role
+        $roleSuperadmin->givePermissionTo('role-create');
+        $roleSuperadmin->givePermissionTo('role-update');
+        $roleSuperadmin->givePermissionTo('role-delete');
+        $roleSuperadmin->givePermissionTo('role-view');
+        // permission
+        $roleSuperadmin->givePermissionTo('permission-create');
+        $roleSuperadmin->givePermissionTo('permission-update');
+        $roleSuperadmin->givePermissionTo('permission-delete');
+        $roleSuperadmin->givePermissionTo('permission-view');
+        
+        // testing data
+        $roleGuest = Role::findByName('guest');
     }
 }
