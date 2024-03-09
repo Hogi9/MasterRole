@@ -20,7 +20,7 @@
 			</a>
 		</li>
 
-		@if (Auth::user()->hasAnyPermission(['role-create', 'role-update', 'role-view', 'role-delete']))
+		@if (Auth::user()->hasAnyPermission(['role.create', 'role.update', 'role.view', 'role.delete']))
 			<li class="menu-item {{ request()->is('hak-akses*') ? 'active open' : '' }}">
 				<a href="javascript:void(0);" class="menu-link menu-toggle">
 					<i class="menu-icon tf-icons bx bx-layout"></i>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -59,8 +60,12 @@ class RoleController extends Controller
         $role = Role::findByName($request['role-name']);
 
         // Untuk menghapus dan deklarasi ulang list permissions role
-        $role->syncPermissions($new_permission['role-permissions']);
-
+        if(isset($new_permission['role-permissions'])){
+            $role->syncPermissions($new_permission['role-permissions']);
+        }else{
+            $role->syncPermissions([]);
+        }
+        
         return redirect('/hak-akses/role')->with('success', $role['name'].' berhasil diupdate');
     }
 
