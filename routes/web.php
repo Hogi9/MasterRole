@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/hak-akses/role/update', [RoleController::class,'update'])->middleware(['role_or_permission:role.update']);
     Route::get('/hak-akses/role/delete/{roleName}', [RoleController::class,'delete'])->middleware(['role_or_permission:role.delete']);
     
-    Route::get('/hak-akses/permission', [PermissionController::class,'index'])->middleware(['role_or_permission:permission.view']);
+    Route::resource('/hak-akses/permission',PermissionController::class);
 });
 
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
