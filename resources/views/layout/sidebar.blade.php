@@ -46,6 +46,11 @@
 			<span class="menu-header-text">Authentication</span>
 		</li>
 
+		<li class="menu-item {{ request()->is('profile') || request()->is('profile*') ? 'active' : '' }}">
+			<a href="{{ url('/profile') }}" class="menu-link">
+				<i class="menu-icon tf-icons bx bx-user-circle"></i>
+				<div data-i18n="Analytics">Profile</div>
+			</a>
 		</li>
 		<li class="menu-item">
 			<a href="{{ url('logout') }}" class="menu-link">
